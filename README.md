@@ -2633,4 +2633,4 @@ for password in passwords:
 
 ![](/graphic/skynet_bonus5.bmp)
 
-Finalnie może nie wyszło by szybciej przy dużym słowniku i mogłem użyć narzędzia `hydra`,s ale ta metoda wydała mi się bardzo ciekawa i oryginalna.
+Finalnie może nie wyszło by szybciej przy dużym słowniku i mogłem użyć narzędzia `hydra`, ale ta metoda wydała mi się bardzo ciekawa i oryginalna.
